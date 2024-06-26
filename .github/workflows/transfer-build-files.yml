@@ -36,6 +36,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
+
       - name: Transfer Build Files to Ubuntu Instance
-        run: whoami
-        #run: scp -r build/* ${{ secrets.REMOTE_USERNAME }}@${{ secrets.REMOTE_HOST }}:/tmp
+        #run: whoami
+        run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.REMOTE_USERNAME }}@${{ secrets.REMOTE_HOST }}
