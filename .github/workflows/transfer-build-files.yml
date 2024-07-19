@@ -8,40 +8,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-           working-directory: ./all_in_docker/client
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: "16"
+    - name: Setup SSH
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
-      # - name: Install Dependencies
-      #   run: npm install
-
-      # - name: Build Application
-      #   run: |
-      #     CI=false npm run builddefaults:
-      run:
- 
-      # - name: List build directory contents
-      #   run: ls -la build
-      #shadkjashdkjas
-
-      - name: Setup SSH-Key-test
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-
-      #- name: Transfer Build Files to Ubuntu Instance
-        #run: whoami
-        #run: ssh ${{ secrets.REMOTE_USERNAME }}@${{ secrets.REMOTE_HOST }}
-        name: Build Docker Images
-        script:
+    - name: executing remote ssh commands using passwordss
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          #whoami
             cd /home/ubuntu/devops-class
             git pull origin main
             cd all_in_docker
