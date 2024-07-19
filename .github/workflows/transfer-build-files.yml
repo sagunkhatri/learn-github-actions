@@ -31,7 +31,7 @@ jobs:
       #   run: ls -la build
       #shadkjashdkjas
 
-      - name: Setup SSH
+      - name: Setup SSH-Key
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
