@@ -39,4 +39,4 @@ jobs:
 
       - name: Transfer Build Files to Ubuntu Instance
         #run: whoami
-        run: ssh ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.REMOTE_USERNAME }}@${{ secrets.REMOTE_HOST }}
+        run: ssh ${{ secrets.REMOTE_USERNAME }}@${{ secrets.REMOTE_HOST }}
