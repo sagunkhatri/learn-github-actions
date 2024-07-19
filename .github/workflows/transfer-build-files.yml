@@ -32,3 +32,4 @@ jobs:
             cd all_in_docker
             sudo docker-compose build
             sudo docker-compose up -d frontend
+            sudo docker-compose up -d backend
